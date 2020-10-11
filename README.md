@@ -14,6 +14,9 @@ Export Trustsec matrix in ISE (make sure you activate the "Include empty cells e
 **Excel version**
 
 ![after](https://i.ibb.co/NKd1B52/after.png)
+
+
+![excel](https://i.ibb.co/LS5vRTD/excel.png)
 ## Requirements
 none. Script uses just python native libraries
 
