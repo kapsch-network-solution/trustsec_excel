@@ -33,11 +33,14 @@ source trustsec_excel/bin/activate
 
 
 ## Export
+
+from ISE to EXCEL
 ``` 
 python trustsec_excel.py -e <ISE_CSV_FILENAME> <EXCEL_CSV_FILENAME>
 ``` 
 
 ## Import
+from EXCEL to ISE
 ``` 
 python trustsec_excel.py -i <EXCEL_CSV_FILENAME> <ISE_CSV_FILENAME> 
 ``` 
