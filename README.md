@@ -42,11 +42,23 @@ from ISE to EXCEL
 python trustsec_excel.py -e <ISE_CSV_FILENAME> <EXCEL_CSV_FILENAME>
 ``` 
 
+**Example usage**
+``` 
+python trustsec_excel.py -e sample.csv excel_sample.csv
+``` 
+This command takes the CSV file sample.csv which was exported from an ISE installation and converts it into EXCEL format file excel_sample.csv
+
 ## Import
 from EXCEL to ISE
 ``` 
 python trustsec_excel.py -i <EXCEL_CSV_FILENAME> <ISE_CSV_FILENAME> 
 ``` 
+
+**Example usage**
+``` 
+python trustsec_excel.py -i excel_sample.csv sample.csv 
+``` 
+This command takes the CSV file excel_sample.csv which was converted before with the -e option and convert it back into the file sample.csv which can be imported back into ISE
 
 ## Limitations
 * Order of SGTs in vertical/horizontal axis in excel csv must be the same
