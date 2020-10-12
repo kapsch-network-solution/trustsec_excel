@@ -1,7 +1,7 @@
 # trustsec_excel
 ![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)
 
-This script converts the ISE trustsec matrix export to a more ISE web gui like version which can bed loaded in EXCEL and edited. Once the offline edit is complete you can convert it back to normal ISE syntax so you can import it again
+This script converts the ISE trustsec matrix export to a more ISE web gui like version which can be loaded in EXCEL and edited. Once the offline edit is complete you can convert it back to normal ISE syntax so you can import it again
 
 Export Trustsec matrix in ISE (make sure you activate the "Include empty cells export)
 
