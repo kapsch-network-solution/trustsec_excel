@@ -1,5 +1,7 @@
 import csv
 import sys
+import difflib
+import re
 
 # function to convert ISE export to excel format
 def func_export(original_file,new_file):
@@ -66,7 +68,11 @@ def func_import(original_file,new_file):
     data = "Source SGT:String(32):Required,Destination SGT:String(32):Required,SGACL Name:String(32):Required,Rule Status:String(enabled|disabled|monitor):Required\n"
 
     with open(original_file, newline='') as csvfile:
-        raw = csv.reader(csvfile, delimiter=',', quotechar='|')
+
+        dialect = csv.Sniffer().sniff(csvfile.read(1024))
+        csvfile.seek(0)
+        raw = csv.reader(csvfile, dialect)
+        #raw = csv.reader(raw_data, delimiter=',', quotechar='|')
 
         for row in raw:
             #first line code
@@ -87,6 +93,40 @@ def func_import(original_file,new_file):
     f.write(data)
     f.close()       
 
+def func_compare(original_file,new_file):
+
+    print("Newfile: " + new_file)
+    print("Oldfile: " + original_file)
+    
+    with open(original_file) as original:
+        original_data = original.readlines()
+        original_data.sort()
+
+    with open(new_file) as new:
+        new_data = new.readlines()
+        new_data.sort()
+
+    list_difference = []
+    for item in new_data:
+        if item not in original_data:
+          list_difference.append(item)
+
+    if len(list_difference) == 0:
+        print("##### No changes found ####")
+    else:
+        print("##### Changes found ####")
+        for change in list_difference:
+            print("New: " + change)
+
+            details = change.split(',')
+            regex = details[0]+","+details[1]+",.*"
+
+            pat = re.compile(regex)
+            old = [i for i in original_data if pat.match(i)]
+            print("Old: " +old[0])
+ 
+            print("==========================================") 
+
 # main section
 if len(sys.argv) == 4:
     original_file = sys.argv[2]
@@ -96,7 +136,9 @@ if len(sys.argv) == 4:
         func_export(original_file,new_file)
     elif sys.argv[1] == "-i":
         func_import(original_file,new_file)
+    elif sys.argv[1] == "-c":
+        func_compare(original_file,new_file)
     else:
-        print("Usage " + sys.argv[0] + "-i/-e <sourcefile> <destinationfile>")
+        print("Usage " + sys.argv[0] + "-i/-e/-c <sourcefile> <destinationfile>")
 else:
-    print("Usage " + sys.argv[0] + "-i/-e <sourcefile> <destinationfile>")
+    print("Usage " + sys.argv[0] + "-i/-e/-c <sourcefile> <destinationfile>")
