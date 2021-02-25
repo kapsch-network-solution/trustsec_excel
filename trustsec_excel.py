@@ -32,7 +32,8 @@ def func_export(original_file,new_file):
             #read first field for tag name, ignore first line
             if i != 0:
                 #print("Index of "+row[0]+ " " + str(keys.index(row[0])))
-                matrix[keys.index(row[0])][keys.index(row[1])] = row[2]
+                celldata = row[2] + "|" + row[3]
+                matrix[keys.index(row[0])][keys.index(row[1])] = celldata
             i=i+1
 
     # code for writing into new file
@@ -85,7 +86,9 @@ def func_import(original_file,new_file):
                 #print(row)
                 for j in range(len(row)):
                     if j != 0:
-                        data = data + row[0] + "," + sgts[j-1]+  "," + row[j] +",enabled\n"
+                        celldata = row[j].split('|')
+                        #data = data + row[0] + "," + sgts[j-1]+  "," + row[j] +",enabled\n"
+                        data = data + row[0] + "," + sgts[j-1]+  "," + celldata[0] +","+celldata[1]+"\n"
             i = i+1
 
     #write file
