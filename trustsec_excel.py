@@ -2,6 +2,7 @@ import csv
 import sys
 import difflib
 import re
+from datetime import datetime
 
 # function to convert ISE export to excel format
 def func_export(original_file,new_file):
@@ -117,10 +118,13 @@ def func_compare(original_file,new_file):
     if len(list_difference) == 0:
         print("##### No changes found ####")
     else:
+        filecontent = "Source SGT:String(32):Required,Destination SGT:String(32):Required,SGACL Name:String(32):Required,Rule Status:String(enabled|disabled|monitor):Required\n"
         print("##### Changes found ####")
         for change in list_difference:
             print("New: " + change)
 
+            #add content to file
+            filecontent = filecontent + change 
             details = change.split(',')
             regex = details[0]+","+details[1]+",.*"
 
@@ -129,6 +133,13 @@ def func_compare(original_file,new_file):
             print("Old: " +old[0])
  
             print("==========================================") 
+
+        now = datetime.now()
+        timestamp =datetime.timestamp(now)  
+        filename = str(timestamp).split('.')[0]+"_delta_import_ise.csv"
+        with open(filename,"w") as importfile:
+            importfile.write(filecontent)
+            print("Delta import file safed as " +filename)	
 
 # main section
 if len(sys.argv) == 4:
