@@ -1,5 +1,5 @@
 # trustsec_excel
-![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/kapsch-network-solution/trustsec_excel)
 
 This script converts the ISE trustsec matrix export to a more ISE web gui like version which can be loaded in EXCEL and edited. Once the offline edit is complete you can convert it back to normal ISE syntax so you can import it again
 
